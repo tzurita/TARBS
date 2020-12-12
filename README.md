@@ -17,12 +17,8 @@ That's it.
 TARBS is a script that autoinstalls and autoconfigures a fully-functioning
 and minimal terminal-and-vim-based Arch Linux environment.
 
-TARBS was originally intended to be run on a fresh install of Arch Linux, and
-provides you with a fully configured diving-board for work or more
-customization. But TARBS also works on already configured systems *and* other
-Arch-based distros such as Manjaro and Parabola (although Parabola,
-which uses slightly different repositories might miss one or two minor
-programs).
+TARBS can be run on a fresh install of Arch or Artix Linux, and provides you
+with a fully configured diving-board for work or more customization.
 
 ## Customization
 
@@ -55,11 +51,12 @@ for people who read the csv or who want to install my dotfiles manually.
 Depending on your own build, you may want to tactically order the programs in
 your programs file. TARBS will install from the top to the bottom.
 
-If you include commas in your program descriptions, be sure to include double quotes around the whole description to ensure correct parsing.
+If you include commas in your program descriptions, be sure to include double
+quotes around the whole description to ensure correct parsing.
 
 ### The script itself
 
-The script is broken up extensively into functions for easier readability and
+The script is extensively divided into functions for easier readability and
 trouble-shooting. Most everything should be self-explanatory.
 
 The main work is done by the `installationloop` function, which iterates
