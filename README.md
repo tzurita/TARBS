@@ -5,7 +5,7 @@
 On an Arch-based distribution as root, run the following:
 
 ```
-curl -LO tomzurita.com/tarbs.sh
+curl -LO raw.github.com/tzurita/TARBS/master/archrice/tarbs.sh
 sh tarbs.sh
 ```
 
