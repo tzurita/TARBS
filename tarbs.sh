@@ -23,7 +23,7 @@ esac done
 
 installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
 
-error() { clear; printf "ERROR:\\n%s\\n" "$1" >&2; exit 1;}
+error() { echo "ERROR: $1" ; exit 1;}
 
 welcomemsg() { \
 	dialog --title "Welcome!" --msgbox "Welcome to Tom's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured Linux desktop, which I use as my main machine.\\n\\n-Tom" 10 60
@@ -81,7 +81,7 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
 	sudo -u "$name" tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
 	cd "$1" &&
-	sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1
+	sudo -u "$name" makepkg --noconfirm -si >/dev/null 2>&1 || return 1
 	cd /tmp || return 1) ;}
 
 maininstall() { # Installs all needed programs from main repo.
@@ -224,7 +224,7 @@ sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 # dbus UUID must be generated for Artix runit.
 dbus-uuidgen > /var/lib/dbus/machine-id
 
-Use system notifications for Brave on Artix
+# Use system notifications for Brave on Artix
 echo "export \$(dbus-launch)" > /etc/profile.d/dbus.sh
 
 # Tap to click
