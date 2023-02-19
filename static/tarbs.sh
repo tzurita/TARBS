@@ -6,7 +6,7 @@
 
 ### OPTIONS AND VARIABLES ###
 
-dotfilesrepo="https://github.com/tzurita/archrice.git"
+dotfilesrepo="https://github.com/tzurita/dotfiles.git"
 progsfile="https://raw.githubusercontent.com/tzurita/TARBS/master/static/progs.csv"
 aurhelper="yay"
 repobranch="master"
