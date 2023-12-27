@@ -9,7 +9,7 @@
 dotfilesrepo="https://github.com/tzurita/dotfiles.git"
 progsfile="https://raw.githubusercontent.com/tzurita/TARBS/master/static/progs.csv"
 aurhelper="yay"
-repobranch="master"
+repobranch="main"
 export TERM=ansi
 
 ### FUNCTIONS ###
@@ -108,7 +108,7 @@ manualinstall() {
 			sudo -u "$name" git pull --force origin master
 		}
 	cd "$repodir/$1" || exit 1
-	sudo -u "$name" -D "$repodir/$1" \
+	sudo -u "$name" \
 		makepkg --noconfirm -si >/dev/null 2>&1 || return 1
 }
 
@@ -283,7 +283,7 @@ done
 
 whiptail --title "TARBS Installation" \
 	--infobox "Synchronizing system time to ensure successful and secure installation of software..." 8 70
-ntpd -q -g >/dev/null 2>&1
+timedatectl set-timezone America/New_York
 
 adduserandpass || error "Error adding username and/or password."
 
