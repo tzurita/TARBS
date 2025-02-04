@@ -122,13 +122,23 @@ gitmakeinstall() {
 	progname="${1##*/}"
 	progname="${progname%.git}"
 	dir="$repodir/$progname"
+	branch="master"  # Default branch
+
+	# Override branch for specific repos
+        case "$progname" in
+            dmenu|dwmblocks|dwm)
+                branch="mydev"
+        	;;
+        esac
+
 	whiptail --title "TARBS Installation" \
-		--infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2" 8 70
+	        --infobox "Installing \`$progname\` ($n of $total) via \`git\` and \`make\`. $(basename "$1") $2 (Branch: $branch)" 8 70 # Added branch info
+
 	sudo -u "$name" git -C "$repodir" clone --depth 1 --single-branch \
-		--no-tags -q "$1" "$dir" ||
+		--no-tags -q -b "$branch" "$1" "$dir" ||
 		{
 			cd "$dir" || return 1
-			sudo -u "$name" git pull --force origin master
+			sudo -u "$name" git pull --force origin "$branch"
 		}
 	cd "$dir" || exit 1
 	make >/dev/null 2>&1
@@ -331,8 +341,8 @@ sudo -u "$name" mkdir -p "/home/$name/.cache/zsh/"
 sudo -u "$name" mkdir -p "/home/$name/.config/abook/"
 sudo -u "$name" mkdir -p "/home/$name/.config/mpd/playlists/"
 
-# Make dash the default #!/bin/sh symlink.
-ln -sfT /bin/dash /bin/sh >/dev/null 2>&1
+# Make bash the default #!/bin/sh symlink.
+ln -sfT /bin/bash /bin/sh >/dev/null 2>&1
 
 # dbus UUID must be generated for Artix runit.
 dbus-uuidgen >/var/lib/dbus/machine-id
